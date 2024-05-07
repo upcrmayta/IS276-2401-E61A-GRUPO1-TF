@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Medicapp"
         tools:targetApi="31">
         <activity
+            android:name=".RegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BienvenidoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:layout_marginStart="10dp"
+    android:background="#A3F6B1"
+    tools:context=".RegistroActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Registrate en MedicApp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtNombreReg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/caja"
+        android:ems="10"
+        android:hint="Nombre o Razon Social"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:textColor="#F96464"
+        android:textColorHint="#F96464"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/txtUsuarioReg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/caja"
+        android:ems="10"
+        android:hint="Usuario o Correo"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:textColor="#F96464"
+        android:textColorHint="#F96464"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreReg" />
+
+    <EditText
+        android:id="@+id/txtClaveReg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/caja"
+        android:ems="10"
+        android:hint="Clave"
+        android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:textColor="#F96464"
+        android:textColorHint="#F96464"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsuarioReg" />
+
+    <Switch
+        android:id="@+id/flgProveedor"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="36dp"
+        android:text="Soy Proveedor"
+        android:textColor="#F96464"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrarUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtClaveReg"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnRegistrarUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="240dp"
+        android:text="Registrar Usuario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
