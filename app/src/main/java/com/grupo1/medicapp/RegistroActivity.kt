@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,11 +16,13 @@ import com.grupo1.medicapp.modelo.UsuarioDAO
 
 class RegistroActivity : AppCompatActivity() {
 
+    private lateinit var txtTitulo: TextView
     private lateinit var txtUsername: EditText
     private lateinit var txtPassword: EditText
     private lateinit var txtNombres: EditText
     private lateinit var txtApeliidos: EditText
     private lateinit var txtDNI: EditText
+    private var modificar = false
 
     private lateinit var btnRegistrar: Button
 
@@ -34,9 +37,27 @@ class RegistroActivity : AppCompatActivity() {
 
         }
             asignarReferencias()
+            recuperarDatos()
     }
-    fun asignarReferencias(){
 
+    fun recuperarDatos(){
+        if (intent.hasExtra("var_id")){
+            modificar = true
+            txtTitulo.text = "Modificar Persona"
+            btnRegistrar.text = "Guardar Cambios"
+            //id = intent.getIntExtra("var_id",0)
+            txtNombres.setText(intent.getStringExtra("var_nombres"))
+            txtApeliidos.setText(intent.getStringExtra("var_apellido"))
+            txtDNI.setText(intent.getStringExtra("var_dni"))
+            txtUsername.setText(intent.getStringExtra("var_usuario"))
+            txtUsername.isEnabled = false
+
+        }
+    }
+
+
+    fun asignarReferencias(){
+        txtTitulo = findViewById(R.id.Title_MedicAPP)
         txtUsername = findViewById(R.id.txtUsername)
         txtPassword = findViewById(R.id.txtClaveReg)
         txtNombres = findViewById(R.id.txtNombres)
@@ -49,7 +70,6 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     fun capturarDatos() {
-
         val usuario = txtUsername.text.toString()
         val password = txtPassword.text.toString()
         val nombres = txtNombres.text.toString()
@@ -89,9 +109,21 @@ class RegistroActivity : AppCompatActivity() {
             objeto.apellidos = apellidos
             objeto.dni = dni
 
-            registrarUsuario(objeto)
+            if(modificar){
+                //objeto.username = usuario
+                editar(objeto)
+            } else{
+                registrarUsuario(objeto)
+            }
 
         }
+    }
+
+    fun editar(objeto: Usuario){
+        val usurioDAO = UsuarioDAO(this)
+        val mensaje = usurioDAO.modificarUsuario(objeto)
+        val username = objeto.username
+        mostrarMensaje2(mensaje,username)
     }
     fun registrarUsuario(objeto: Usuario){
 
@@ -106,6 +138,18 @@ class RegistroActivity : AppCompatActivity() {
         ventana.setMessage(mensaje)
         ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
             val intent = Intent (this,MainActivity::class.java)
+            startActivity(intent)
+        })
+        ventana.create().show()
+    }
+
+    fun mostrarMensaje2(mensaje:String,username:String){
+        val ventana = AlertDialog.Builder(this)
+        ventana.setTitle("Mensaje Informativo")
+        ventana.setMessage(mensaje)
+        ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
+            val intent = Intent (this,BienvenidoActivity::class.java)
+            intent.putExtra("nombreUsuario",username)
             startActivity(intent)
         })
         ventana.create().show()
