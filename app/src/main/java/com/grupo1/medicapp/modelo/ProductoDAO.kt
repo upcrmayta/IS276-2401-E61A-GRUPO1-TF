@@ -35,14 +35,24 @@ class ProductoDAO(context:Context) {
         return respuesta
     }
 
+    fun cargarProducto():ArrayList<Producto>{
+        return cargarProducto(-1)
+    }
+
     fun cargarProducto(id:Int):ArrayList<Producto>{
         val listarProducto:ArrayList<Producto> = ArrayList()
-        val query = "SELECT * FROM productos_farmacia WHERE id_producto = ?"
+        lateinit var query:String
         val db = base.readableDatabase
         val cursor: Cursor
 
         val params:ArrayList<String> = ArrayList()
-        params.add(id.toString())
+        if(id == -1){
+            query = "SELECT * FROM productos_farmacia"
+        }else{
+            query = "SELECT * FROM productos_farmacia WHERE id_producto = ?"
+            params.add(id.toString())
+        }
+
         try{
             cursor = db.rawQuery(query,params.toTypedArray())
             if(cursor.count > 0){
