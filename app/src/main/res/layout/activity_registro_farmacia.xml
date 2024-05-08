@@ -8,14 +8,14 @@
     android:layout_margin="15dp"
     android:layout_marginStart="10dp"
     android:background="#A3F6B1"
-    tools:context=".RegistroActivity">
+    tools:context=".RegistroFarmacia">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Registrate en MedicApp"
+        android:text="Registrata tu farmacia en MedicApp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,13 +24,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtUsername"
+        android:id="@+id/txtNombreFarma"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/caja"
         android:ems="10"
-        android:hint="Usuario o Correo"
+        android:hint="Nombre Empresa"
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:textColor="#F96464"
@@ -38,13 +38,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPassFarma" />
 
     <EditText
-        android:id="@+id/txtClaveReg"
+        android:id="@+id/txtPassFarma"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/caja"
         android:ems="10"
         android:hint="Password"
@@ -55,16 +55,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailFarma" />
 
     <EditText
-        android:id="@+id/txtNombres"
+        android:id="@+id/txtEmailFarma"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/caja"
         android:ems="10"
-        android:hint="Nombres"
+        android:hint="Email"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textColor="#F96464"
@@ -72,33 +72,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtClaveReg" />
-
-    <EditText
-        android:id="@+id/txtApellidos"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/caja"
-        android:ems="10"
-        android:hint="Apellidos"
-        android:inputType="text"
-        android:paddingStart="10dp"
-        android:textColor="#F96464"
-        android:textColorHint="#F96464"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombres" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/txtDirecFarma"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/caja"
         android:ems="10"
-        android:hint="DNI"
+        android:hint="Dirección"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textColor="#F96464"
@@ -106,17 +89,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreFarma" />
 
     <Button
         android:id="@+id/btnRegistrarFarmacia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="76dp"
-        android:text="Registrar Usuario"
+        android:text="Registrar Farmacia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDirecFarma" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

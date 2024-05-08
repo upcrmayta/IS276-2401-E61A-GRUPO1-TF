@@ -8,9 +8,12 @@ import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.grupo1.medicapp.entidades.Farmacia
 import com.grupo1.medicapp.entidades.Usuario
+import com.grupo1.medicapp.modelo.FarmaciaDAO
 import com.grupo1.medicapp.modelo.UsuarioDAO
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var txtUsername: EditText
     private lateinit var txtPassword: EditText
     private lateinit var btnIniciarSesion: Button
+    private lateinit var switchButton: SwitchCompat
+    private var check: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +35,25 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         asignarReferencias()
+
+
     }
 
     fun asignarReferencias(){
-
+        switchButton = findViewById<SwitchCompat>(R.id.switchButton)
         txtUsername = findViewById(R.id.txtUsuario)
         txtPassword = findViewById(R.id.txtClave)
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion)
+
+        switchButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                switchButton.text = "Farmacia"
+                check  = true
+            } else {
+                switchButton.text = "Usuario"
+                check = false
+            }
+        }
 
         btnIniciarSesion.setOnClickListener{
             capturarDatos()}
@@ -44,8 +62,8 @@ class LoginActivity : AppCompatActivity() {
 
         val usuario = txtUsername.text.toString()
         val password = txtPassword.text.toString()
-
-        var validar = true
+        var switch = check
+        var validar= true
 
         if (usuario.isEmpty()) {
             validar = false
@@ -58,28 +76,70 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if (validar) {
-            val objeto = Usuario()
-            objeto.username = usuario
-            objeto.password = password
 
-            loginUsuario(objeto)
-        }
+            if (switch){
+                val objeto = Farmacia()
+                objeto.email = usuario
+                objeto.password = password
+                loginFarmacia(objeto)
+
+            }else{
+                val objeto = Usuario()
+                objeto.username = usuario
+                objeto.password = password
+                loginUsuario(objeto)
+            }
+
+
+
+    }
     }
 
     fun loginUsuario(objeto: Usuario){
         val usuarioDAO = UsuarioDAO(this)
         val veredicto = usuarioDAO.loginUsuario(objeto)
-        mostrarMensaje(veredicto)
+        val username = objeto.username
+        mostrarMensajeUsuario(veredicto, username)
+    }
+
+    fun loginFarmacia(objeto: Farmacia){
+        val username =  objeto.email
+        val farmaciaDAO = FarmaciaDAO(this)
+        val veredicto = farmaciaDAO.loginFarmacia(objeto)
+
+        mostrarMensajeFarmacia(veredicto,username)
 
     }
 
-    fun mostrarMensaje(veredicto:Boolean){
+    fun mostrarMensajeUsuario(veredicto:Boolean, username:String){
         if(veredicto){
             val ventana = AlertDialog.Builder(this)
             ventana.setTitle("Mensaje Informativo")
             ventana.setMessage("Login Exitoso")
             ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
                 val intent = Intent (this,BienvenidoActivity::class.java)
+                intent.putExtra("nombreUsuario",username)
+                startActivity(intent)
+            })
+            ventana.create().show()
+        } else{
+            val ventana = AlertDialog.Builder(this)
+            ventana.setTitle("Mensaje Informativo")
+            ventana.setMessage("Usuario y/o contraseña incorrecta")
+            ventana.setPositiveButton("Aceptar", null)
+            ventana.create().show()
+
+        }
+
+    }
+    fun mostrarMensajeFarmacia(veredicto:Boolean, username:String){
+        if(veredicto){
+            val ventana = AlertDialog.Builder(this)
+            ventana.setTitle("Mensaje Informativo")
+            ventana.setMessage("Login Exitoso")
+            ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
+                val intent = Intent (this,BienvenidoActivity::class.java)
+                intent.putExtra("nombreUsuario",username)
                 startActivity(intent)
             })
             ventana.create().show()
