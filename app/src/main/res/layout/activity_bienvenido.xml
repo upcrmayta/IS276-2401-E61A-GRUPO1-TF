@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnBuscar_bienvenido"
+        android:id="@+id/btnBuscarProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="208dp"
@@ -69,7 +69,7 @@
         android:paddingStart="10dp"
         android:textColor="#F96464"
         android:textColorHint="#F96464"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuscar_bienvenido"
+        app:layout_constraintBottom_toTopOf="@+id/btnBuscarProducto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
