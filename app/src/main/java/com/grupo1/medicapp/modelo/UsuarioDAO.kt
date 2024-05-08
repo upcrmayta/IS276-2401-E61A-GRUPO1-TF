@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
+import com.grupo1.medicapp.entidades.Farmacia
 import com.grupo1.medicapp.entidades.Usuario
 import com.grupo1.medicapp.util.BaseDatos
 
@@ -88,6 +89,33 @@ class UsuarioDAO(context: Context) {
         db.close()
         }
         return isValidUser
+    }
+
+    fun obtenerUsuario(usuario: String): Usuario{
+        val username = usuario
+        val query = "SELECT * FROM Usuario WHERE username = ?"
+        val db = base.readableDatabase
+        var cursor: Cursor? = null
+        val usuarioEncontrado = Usuario()
+
+        try {
+            cursor = db.rawQuery(query, arrayOf(username))
+            if (cursor.moveToFirst()) {
+                val usuarioEncontrado = Usuario()
+                    usuarioEncontrado.id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+                    usuarioEncontrado.username = cursor.getString(cursor.getColumnIndexOrThrow("username"))
+                    usuarioEncontrado.nombres = cursor.getString(cursor.getColumnIndexOrThrow("nombres"))
+                    usuarioEncontrado.apellidos = cursor.getString(cursor.getColumnIndexOrThrow("apellidos"))
+                    usuarioEncontrado.dni = cursor.getString(cursor.getColumnIndexOrThrow("dni"))
+            }
+        } catch (e: Exception) {
+            Log.d("UsuarioDAO", "Error al obtener usuario: ${e.message}")
+        } finally {
+            cursor?.close()
+            db.close()
+        }
+
+        return usuarioEncontrado
     }
 
 }

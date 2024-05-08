@@ -98,24 +98,48 @@ class LoginActivity : AppCompatActivity() {
     fun loginUsuario(objeto: Usuario){
         val usuarioDAO = UsuarioDAO(this)
         val veredicto = usuarioDAO.loginUsuario(objeto)
-        mostrarMensaje(veredicto)
-
+        val username = objeto.username
+        mostrarMensajeUsuario(veredicto, username)
     }
 
     fun loginFarmacia(objeto: Farmacia){
+        val username =  objeto.email
         val farmaciaDAO = FarmaciaDAO(this)
         val veredicto = farmaciaDAO.loginFarmacia(objeto)
-        mostrarMensaje(veredicto)
+
+        mostrarMensajeFarmacia(veredicto,username)
 
     }
 
-    fun mostrarMensaje(veredicto:Boolean){
+    fun mostrarMensajeUsuario(veredicto:Boolean, username:String){
         if(veredicto){
             val ventana = AlertDialog.Builder(this)
             ventana.setTitle("Mensaje Informativo")
             ventana.setMessage("Login Exitoso")
             ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
                 val intent = Intent (this,BienvenidoActivity::class.java)
+                intent.putExtra("nombreUsuario",username)
+                startActivity(intent)
+            })
+            ventana.create().show()
+        } else{
+            val ventana = AlertDialog.Builder(this)
+            ventana.setTitle("Mensaje Informativo")
+            ventana.setMessage("Usuario y/o contraseña incorrecta")
+            ventana.setPositiveButton("Aceptar", null)
+            ventana.create().show()
+
+        }
+
+    }
+    fun mostrarMensajeFarmacia(veredicto:Boolean, username:String){
+        if(veredicto){
+            val ventana = AlertDialog.Builder(this)
+            ventana.setTitle("Mensaje Informativo")
+            ventana.setMessage("Login Exitoso")
+            ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
+                val intent = Intent (this,BienvenidoActivity::class.java)
+                intent.putExtra("nombreUsuario",username)
                 startActivity(intent)
             })
             ventana.create().show()

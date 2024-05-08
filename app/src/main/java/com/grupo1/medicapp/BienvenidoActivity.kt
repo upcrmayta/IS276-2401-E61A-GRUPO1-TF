@@ -1,6 +1,7 @@
 package com.grupo1.medicapp
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,10 +12,15 @@ class BienvenidoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_bienvenido)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val nombreUsuario = intent.getStringExtra("nombreUsuario")
+        val textViewNombreUsuario = findViewById<TextView>(R.id.textViewNombreUsuario)
+        textViewNombreUsuario.text = "Bienvenido, $nombreUsuario"
     }
 }
