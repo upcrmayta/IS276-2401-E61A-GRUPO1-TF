@@ -59,17 +59,17 @@
         android:paddingStart="10dp"
         android:textColor="#F96464"
         android:textColorHint="#F96464"
-        app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegisFarma"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnBuscar"
+        android:id="@+id/btnRegisFarma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="Buscar"
+        android:text="Registrar Farmacia"
         app:layout_constraintBottom_toTopOf="@+id/btnRedirCrearCuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="116dp"
-        android:text="Crear cuenta"
+        android:text="Registrar Usuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
