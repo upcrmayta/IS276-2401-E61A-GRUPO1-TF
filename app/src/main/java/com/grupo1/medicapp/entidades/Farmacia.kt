@@ -6,4 +6,6 @@ class Farmacia {
     lateinit var password:String
     lateinit var nombre:String
     lateinit var direccion:String
+
+    lateinit var ubicacion:Ubicacion
 }

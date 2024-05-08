@@ -7,4 +7,6 @@ class Producto {
     var precio:Double = 0.0
     var stock:Int = 0
     lateinit var descripcion:String
+
+    lateinit var farmacia:Farmacia
 }

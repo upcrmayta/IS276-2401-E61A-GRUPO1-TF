@@ -2,8 +2,10 @@ package com.grupo1.medicapp
 
 import android.content.Intent
 import android.os.Bundle
+
 import android.widget.Button
 import android.widget.TextView
+
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +14,9 @@ import com.grupo1.medicapp.entidades.Usuario
 import com.grupo1.medicapp.modelo.UsuarioDAO
 
 class BienvenidoActivity : AppCompatActivity() {
+
     private lateinit var btn_Actualizar_Datos: Button
+    private lateinit var btnBuscarProducto:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +28,15 @@ class BienvenidoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        asignarReferencias()
+    }
 
+    fun asignarReferencias(){
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
         val textViewNombreUsuario = findViewById<TextView>(R.id.textViewNombreUsuario)
         textViewNombreUsuario.text = "Bienvenido, $nombreUsuario"
-        val cargaUsuario = nombreUsuario.toString()
 
+        val cargaUsuario = nombreUsuario.toString()
         loadUsuario(cargaUsuario)
     }
 
@@ -47,9 +54,13 @@ class BienvenidoActivity : AppCompatActivity() {
             intent.putExtra("var_apellido",datosUsuario.apellidos)
             intent.putExtra("var_dni",datosUsuario.dni)
             startActivity(intent)
-    }
-
-
+        }
+        
+        btnBuscarProducto = findViewById(R.id.btnBuscarProducto)
+        btnBuscarProducto.setOnClickListener{
+            val intent = Intent(this,ProductosActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
