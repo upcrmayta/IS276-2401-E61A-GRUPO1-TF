@@ -10,38 +10,38 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.grupo1.medicapp.entidades.Farmacia
 import com.grupo1.medicapp.entidades.Usuario
+import com.grupo1.medicapp.modelo.FarmaciaDAO
 import com.grupo1.medicapp.modelo.UsuarioDAO
 
-class RegistroActivity : AppCompatActivity() {
+class RegistroFarmacia : AppCompatActivity() {
 
-    private lateinit var txtUsername: EditText
-    private lateinit var txtPassword: EditText
-    private lateinit var txtNombres: EditText
-    private lateinit var txtApeliidos: EditText
-    private lateinit var txtDNI: EditText
+    private lateinit var txtemail: EditText
+    private lateinit var txtPass: EditText
+    private lateinit var txtFarmacia: EditText
+    private lateinit var txtDireccion: EditText
 
     private lateinit var btnRegistrar: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_registro)
+        setContentView(R.layout.activity_registro_farmacia)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-
         }
-            asignarReferencias()
+        asignarReferencias()
     }
+
     fun asignarReferencias(){
 
-        txtUsername = findViewById(R.id.txtUsername)
-        txtPassword = findViewById(R.id.txtClaveReg)
-        txtNombres = findViewById(R.id.txtNombres)
-        txtApeliidos = findViewById(R.id.txtApellidos)
-        txtDNI = findViewById(R.id.txtDirecFarma)
+        txtemail = findViewById(R.id.txtEmailFarma)
+        txtPass = findViewById(R.id.txtPassFarma)
+        txtFarmacia = findViewById(R.id.txtNombreFarma)
+        txtDireccion = findViewById(R.id.txtDirecFarma)
+
         btnRegistrar = findViewById(R.id.btnRegistrarFarmacia)
 
         btnRegistrar.setOnClickListener{
@@ -50,54 +50,48 @@ class RegistroActivity : AppCompatActivity() {
 
     fun capturarDatos() {
 
-        val usuario = txtUsername.text.toString()
-        val password = txtPassword.text.toString()
-        val nombres = txtNombres.text.toString()
-        val apellidos = txtApeliidos.text.toString()
-        val dni = txtDNI.text.toString()
+        val email = txtemail.text.toString()
+        val password = txtPass.text.toString()
+        val farmacia = txtFarmacia.text.toString()
+        val direccion = txtDireccion.text.toString()
 
         var validar = true
 
-        if (usuario.isEmpty()) {
+        if (email.isEmpty()) {
             validar = false
-            txtUsername.setError("Usuario es obligatorio")
+            txtemail.setError("Email es obligatorio")
         }
 
         if (password.isEmpty()) {
             validar = false
-            txtPassword.setError("Password es obligatorio")
+            txtPass.setError("Password es obligatorio")
         }
-        if (nombres.isEmpty()) {
+        if (farmacia.isEmpty()) {
             validar = false
-            txtUsername.setError("Nombres es obligatorio")
+            txtFarmacia.setError("Nombre Farmacia es obligatorio")
         }
 
-        if (apellidos.isEmpty()) {
+        if (direccion.isEmpty()) {
             validar = false
-            txtPassword.setError("Apellidos es obligatorio")
-        }
-        if (dni.isEmpty()) {
-            validar = false
-            txtPassword.setError("DNI es obligatorio")
+            txtDireccion.setError("Dirección es obligatorio")
         }
 
         if (validar) {
-            val objeto = Usuario()
-            objeto.username = usuario
+            val objeto = Farmacia()
+            objeto.email = email
             objeto.password = password
-            objeto.nombres = nombres
-            objeto.apellidos = apellidos
-            objeto.dni = dni
+            objeto.nombre = farmacia
+            objeto.direccion = direccion
 
-            registrarUsuario(objeto)
+            registrarFarmacia(objeto)
 
         }
     }
-    fun registrarUsuario(objeto: Usuario){
+    fun registrarFarmacia(objeto: Farmacia){
 
-            val usuarioDAO = UsuarioDAO(this)
-            val mensaje = usuarioDAO.registrarUsuario(objeto)
-            mostrarMensaje(mensaje)
+        val farmaciaDAO = FarmaciaDAO(this)
+        val mensaje = farmaciaDAO.registrarFarmacia(objeto)
+        mostrarMensaje(mensaje)
     }
 
     fun mostrarMensaje(mensaje:String){
@@ -110,8 +104,4 @@ class RegistroActivity : AppCompatActivity() {
         })
         ventana.create().show()
     }
-
-
-
 }
-

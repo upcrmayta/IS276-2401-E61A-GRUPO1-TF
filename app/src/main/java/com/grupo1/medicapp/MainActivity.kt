@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnRedirCrearCuen: Button
     private lateinit var btnRedirIniciarSesion: Button
+    private lateinit var btnCrearFarmacia: Button
 
     private lateinit var txtEmail:EditText
     private lateinit var txtUsername:EditText
@@ -48,6 +49,12 @@ class MainActivity : AppCompatActivity() {
         btnRedirIniciarSesion = findViewById(R.id.btnRedirIniciarSesion)
         btnRedirIniciarSesion.setOnClickListener{
             val intent = Intent (this,LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnCrearFarmacia = findViewById(R.id.btnRegisFarma)
+        btnCrearFarmacia.setOnClickListener{
+            val intent = Intent (this,RegistroFarmacia::class.java)
             startActivity(intent)
         }
 

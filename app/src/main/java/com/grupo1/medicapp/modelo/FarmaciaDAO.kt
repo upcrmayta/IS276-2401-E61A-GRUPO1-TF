@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.util.Log
 import com.grupo1.medicapp.entidades.Farmacia
 import com.grupo1.medicapp.entidades.Ubicacion
+import com.grupo1.medicapp.entidades.Usuario
 import com.grupo1.medicapp.util.BaseDatos
 
 class FarmaciaDAO(context:Context) {
@@ -20,7 +21,7 @@ class FarmaciaDAO(context:Context) {
             valores.put("password", farmacia.password)
             valores.put("nombre_empresa", farmacia.nombre)
             valores.put("direccion", farmacia.direccion)
-            val r = db.insert("farmacias",null,valores)
+            val r = db.insert("Farmacia",null,valores)
             if(r == -1L){
                 respuesta = "Ocurrió un error al insertar"
             }else{
@@ -34,34 +35,27 @@ class FarmaciaDAO(context:Context) {
         return respuesta
     }
 
-    fun cargarFarmacia(id:Int):ArrayList<Farmacia>{
-        val listarFarmacia:ArrayList<Farmacia> = ArrayList()
-        val query = "SELECT * FROM farmacias WHERE id = ?"
-        val db = base.readableDatabase
-        val cursor: Cursor
+    fun loginFarmacia(farmacia: Farmacia):Boolean {
 
-        val params:ArrayList<String> = ArrayList()
-        params.add(id.toString())
+        val email = farmacia.email
+        val password = farmacia.password
+        val db = base.readableDatabase
+        var isValid = false
+
         try{
-            cursor = db.rawQuery(query,params.toTypedArray())
-            if(cursor.count > 0){
-                cursor.moveToFirst()
-                do{
-                    val farmacia = Farmacia()
-                    farmacia.id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
-                    farmacia.email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
-                    farmacia.password = cursor.getString(cursor.getColumnIndexOrThrow("password"))
-                    farmacia.nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_empresa"))
-                    farmacia.direccion = cursor.getString(cursor.getColumnIndexOrThrow("direccion"))
-                    listarFarmacia.add(farmacia)
-                }while(cursor.moveToNext())
-            }
+            val query = "SELECT * FROM Farmacia WHERE email = ? AND password = ?"
+            val cursor: Cursor? = db.rawQuery(query, arrayOf(email, password))
+            val count = cursor?.count ?: 0
+            isValid = count > 0
+            cursor?.close()
+
         }catch (e:Exception){
             Log.d("===",e.message.toString())
+
         }finally {
             db.close()
         }
-        return listarFarmacia
+        return isValid
     }
 
     fun obtenerUbicacion(id:Int):Ubicacion{
