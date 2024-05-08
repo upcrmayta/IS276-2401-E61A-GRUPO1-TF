@@ -15,13 +15,13 @@ class UsuarioDAO(context: Context) {
         val db = base.writableDatabase
         try {
             val valores = ContentValues()
-            valores.put("email", usuario.email)
+            //valores.put("email", usuario.email)
             valores.put("username", usuario.username)
             valores.put("password", usuario.password)
             valores.put("nombres", usuario.nombres)
             valores.put("apellidos", usuario.apellidos)
             valores.put("dni", usuario.dni)
-            val r = db.insert("usuarios",null,valores)
+            val r = db.insert("Usuario",null,valores)
             if(r == -1L){
                 respuesta = "Ocurrió un error al insertar"
             }else{
@@ -50,7 +50,7 @@ class UsuarioDAO(context: Context) {
                 do{
                     val usuario = Usuario()
                     usuario.id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
-                    usuario.email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
+                    //usuario.email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
                     usuario.username = cursor.getString(cursor.getColumnIndexOrThrow("username"))
                     usuario.password = cursor.getString(cursor.getColumnIndexOrThrow("password"))
                     usuario.nombres = cursor.getString(cursor.getColumnIndexOrThrow("nombres"))
@@ -66,4 +66,28 @@ class UsuarioDAO(context: Context) {
         }
         return listarUsuarios
     }
+
+    fun loginUsuario(usuario: Usuario):Boolean {
+
+        val username = usuario.username
+        val password = usuario.password
+        val db = base.readableDatabase
+        var isValidUser = false
+
+        try{
+            val query = "SELECT * FROM Usuario WHERE username = ? AND password = ?"
+            val cursor: Cursor? = db.rawQuery(query, arrayOf(username, password))
+            val count = cursor?.count ?: 0
+            isValidUser = count > 0
+            cursor?.close()
+
+        }catch (e:Exception){
+        Log.d("===",e.message.toString())
+
+        }finally {
+        db.close()
+        }
+        return isValidUser
+    }
+
 }

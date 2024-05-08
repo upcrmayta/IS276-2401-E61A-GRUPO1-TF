@@ -1,5 +1,6 @@
 package com.grupo1.medicapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -8,10 +9,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.grupo1.medicapp.entidades.Usuario
 import com.grupo1.medicapp.modelo.UsuarioDAO
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var btnRedirCrearCuen: Button
+    private lateinit var btnRedirIniciarSesion: Button
 
     private lateinit var txtEmail:EditText
     private lateinit var txtUsername:EditText
@@ -30,10 +35,24 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        asignarReferencias()
+       asignarReferencias()
     }
 
     fun asignarReferencias(){
+        btnRedirCrearCuen = findViewById(R.id.btnRedirCrearCuenta)
+        btnRedirCrearCuen.setOnClickListener{
+            val intent = Intent (this,RegistroActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnRedirIniciarSesion = findViewById(R.id.btnRedirIniciarSesion)
+        btnRedirIniciarSesion.setOnClickListener{
+            val intent = Intent (this,LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
 //        txtEmail = findViewById(R.id.txtEmail)
 //        txtUsername = findViewById(R.id.txtUsername)
 //        txtPassword = findViewById(R.id.txtPassword)
@@ -47,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    fun capturarDatos(){
+    /*fun capturarDatos(){
         val email = txtEmail.text.toString()
         val username = txtUsername.text.toString()
         val password = txtPassword.text.toString()
@@ -83,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         if(valida){
             val objeto = Usuario()
-            objeto.email = email
+            //objeto.email = email
             objeto.username = username
             objeto.password = password
             objeto.nombres = nombres
@@ -91,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             objeto.dni = dni
             registrar(objeto)
         }
-    }
+    }*/
 
     fun registrar(objeto:Usuario){
         val usuarioDAO = UsuarioDAO(this)

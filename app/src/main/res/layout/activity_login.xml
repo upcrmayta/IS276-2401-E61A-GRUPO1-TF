@@ -27,6 +27,7 @@
     <EditText
         android:id="@+id/txtUsuario"
         android:layout_height="50dp"
+        android:layout_width="match_parent"
         android:layout_marginBottom="52dp"
         android:background="@drawable/caja"
         android:ems="10"

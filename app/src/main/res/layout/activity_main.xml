@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="MedicaAPP"
+        android:text="MedicAPP"
         android:textColor="#F96464"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -51,7 +51,7 @@
         android:id="@+id/txtBuscarMedicamento"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/caja"
         android:ems="10"
         android:hint="Buscar medicamento"
@@ -79,11 +79,10 @@
         android:id="@+id/btnRedirCrearCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="168dp"
+        android:layout_marginBottom="116dp"
         android:text="Crear cuenta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
