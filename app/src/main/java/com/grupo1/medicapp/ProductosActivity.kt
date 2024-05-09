@@ -32,7 +32,10 @@ class ProductosActivity : AppCompatActivity() {
     }
 
     fun mostrarProductos(){
+//        val strBuscarProducto = intent.getStringExtra("var_buscar_producto")
+//        val listarProductos = productoDAO.cargarProducto(strBuscarProducto);
         val listarProductos = productoDAO.cargarProducto();
+        adaptadorProducto.agregarDatos(listarProductos)
     }
 
     fun asignarReferencias(){

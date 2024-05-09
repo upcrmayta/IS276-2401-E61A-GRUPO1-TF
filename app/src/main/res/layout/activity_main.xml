@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="0dp"
     android:background="@color/primario"
     android:paddingTop="16dp"
     tools:context=".MainActivity">
@@ -53,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/txtBuscarMedicamento"
+        android:id="@+id/txtBuscarProducto"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -85,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBuscarMedicamento" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBuscarProducto" />
 
     <Button
         android:id="@+id/btnRedirCrearCuenta"

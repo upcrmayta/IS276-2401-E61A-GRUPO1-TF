@@ -22,7 +22,7 @@ class UsuarioDAO(context: Context) {
             valores.put("nombres", usuario.nombres)
             valores.put("apellidos", usuario.apellidos)
             valores.put("dni", usuario.dni)
-            val r = db.insert("Usuario", null, valores)
+            val r = db.insert("usuarios", null, valores)
             if (r == -1L) {
                 respuesta = "Ocurrió un error al insertar"
             } else {
@@ -76,7 +76,7 @@ class UsuarioDAO(context: Context) {
         var isValidUser = false
 
         try {
-            val query = "SELECT * FROM Usuario WHERE username = ? AND password = ?"
+            val query = "SELECT * FROM usuarios WHERE username = ? AND password = ?"
             val cursor: Cursor? = db.rawQuery(query, arrayOf(username, password))
             val count = cursor?.count ?: 0
             isValidUser = count > 0
@@ -93,7 +93,7 @@ class UsuarioDAO(context: Context) {
 
     fun obtenerUsuario(usuario: String): Usuario {
         val username = usuario
-        val query = "SELECT * FROM Usuario WHERE username = ?"
+        val query = "SELECT * FROM usuarios WHERE username = ?"
         val db = base.readableDatabase
         var cursor: Cursor? = null
         val usuarioEncontrado = Usuario()
@@ -134,7 +134,7 @@ class UsuarioDAO(context: Context) {
             valores.put("apellidos", usuario.apellidos)
             valores.put("dni", usuario.dni)
 
-            val r = db.update("Usuario", valores, "username like '" + usuario.username + "'", null)
+            val r = db.update("usuarios", valores, "username like '" + usuario.username + "'", null)
             if (r == -1) {
                 respuesta = "Ocurrió un error al actualizar"
             } else {

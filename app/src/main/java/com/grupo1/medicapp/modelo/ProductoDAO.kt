@@ -15,7 +15,7 @@ class ProductoDAO(context:Context) {
         val db = base.writableDatabase
         try {
             val valores = ContentValues()
-            valores.put("id_producto", producto.id)
+//            valores.put("id_producto", producto.id)
             valores.put("id_farmacia", producto.id_farmacia)
             valores.put("nombre_producto", producto.nombre)
             valores.put("precio_producto", producto.precio)
@@ -36,18 +36,28 @@ class ProductoDAO(context:Context) {
     }
 
     fun cargarProducto():ArrayList<Producto>{
-        return cargarProducto(-1)
+        return cargarProducto(-1, null)
     }
 
     fun cargarProducto(id:Int):ArrayList<Producto>{
+        return cargarProducto(id,null)
+    }
+
+    fun cargarProducto(nombre:String?):ArrayList<Producto>{
+        return cargarProducto(-1, nombre)
+    }
+
+    fun cargarProducto(id:Int, nombre:String?):ArrayList<Producto>{
         val listarProducto:ArrayList<Producto> = ArrayList()
         lateinit var query:String
         val db = base.readableDatabase
         val cursor: Cursor
 
         val params:ArrayList<String> = ArrayList()
-        if(id == -1){
+        if(id == -1 && nombre == null){
             query = "SELECT * FROM productos_farmacia"
+        }else if(nombre != null){
+            query = "SELECT * FROM productos_farmacia WHERE nombre LIKE '" + nombre + "%'"
         }else{
             query = "SELECT * FROM productos_farmacia WHERE id_producto = ?"
             params.add(id.toString())
@@ -64,7 +74,7 @@ class ProductoDAO(context:Context) {
                     producto.nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_producto"))
                     producto.precio = cursor.getDouble(cursor.getColumnIndexOrThrow("precio_producto"))
                     producto.stock = cursor.getInt(cursor.getColumnIndexOrThrow("stock"))
-                    producto.descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripción"))
+                    producto.descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
                     listarProducto.add(producto)
                 }while(cursor.moveToNext())
             }
