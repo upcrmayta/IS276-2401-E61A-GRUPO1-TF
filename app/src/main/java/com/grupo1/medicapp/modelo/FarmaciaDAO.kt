@@ -21,7 +21,7 @@ class FarmaciaDAO(context:Context) {
             valores.put("password", farmacia.password)
             valores.put("nombre_empresa", farmacia.nombre)
             valores.put("direccion", farmacia.direccion)
-            val r = db.insert("Farmacia",null,valores)
+            val r = db.insert("farmacias",null,valores)
             if(r == -1L){
                 respuesta = "Ocurrió un error al insertar"
             }else{
@@ -43,7 +43,7 @@ class FarmaciaDAO(context:Context) {
         var isValid = false
 
         try{
-            val query = "SELECT * FROM Farmacia WHERE email = ? AND password = ?"
+            val query = "SELECT * FROM farmacias WHERE email = ? AND password = ?"
             val cursor: Cursor? = db.rawQuery(query, arrayOf(email, password))
             val count = cursor?.count ?: 0
             isValid = count > 0

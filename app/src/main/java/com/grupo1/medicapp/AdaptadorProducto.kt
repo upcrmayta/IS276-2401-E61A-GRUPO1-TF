@@ -24,8 +24,8 @@ class AdaptadorProducto:RecyclerView.Adapter<AdaptadorProducto.MiViewHolder>() {
         fun bindView(producto:Producto){
             filaProductoNombre.text = producto.nombre
             filaProductoPrecio.text = "S/." + producto.precio.toString()
-            filaFarmaciaNombre.text = producto.farmacia.nombre
-            filaFarmaciaDireccion.text = producto.farmacia.direccion
+//            filaFarmaciaNombre.text = producto.farmacia.nombre
+//            filaFarmaciaDireccion.text = producto.farmacia.direccion
         }
     }
 

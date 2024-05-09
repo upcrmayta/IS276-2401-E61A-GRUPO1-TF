@@ -11,7 +11,7 @@ class BaseDatos(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        var sql1 = "CREATE TABLE IF NOT EXISTS Usuario (" +
+        var sql1 = "CREATE TABLE IF NOT EXISTS usuarios (" +
                 "  id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 //"  email TEXT NOT NULL UNIQUE," +
                 "  username TEXT NOT NULL," +
@@ -22,7 +22,7 @@ class BaseDatos(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,
                 ");"
         db.execSQL(sql1)
 
-        var sql2 = "CREATE TABLE IF NOT EXISTS Farmacia (" +
+        var sql2 = "CREATE TABLE IF NOT EXISTS farmacias (" +
                 "  id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "  email TEXT NOT NULL," +
                 "  password TEXT NOT NULL," +
@@ -31,7 +31,7 @@ class BaseDatos(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,
                 ");"
         db.execSQL(sql2)
 
-        var sql3 = "CREATE TABLE IF NOT EXISTS Ubicación_Mapa (" +
+        var sql3 = "CREATE TABLE IF NOT EXISTS ubicacion_mapa (" +
                 "  id_farmacia INTEGER," +
                 "  lat REAL NOT NULL," +
                 "  lon REAL NOT NULL," +
@@ -39,13 +39,13 @@ class BaseDatos(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,
                 ");"
         db.execSQL(sql3)
 
-        var sql4 = "CREATE TABLE IF NOT EXISTS Productos_Farmacia (" +
+        var sql4 = "CREATE TABLE IF NOT EXISTS productos_farmacia (" +
                 "  id_producto INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "  id_farmacia INTEGER," +
                 "  nombre_producto TEXT NOT NULL," +
                 "  precio_producto REAL NOT NULL," +
                 "  stock INTEGER NOT NULL," +
-                "  descripción TEXT," +
+                "  descripcion TEXT," +
                 "  FOREIGN KEY(id_farmacia) REFERENCES farmacias(id)" +
                 ");"
         db.execSQL(sql4)

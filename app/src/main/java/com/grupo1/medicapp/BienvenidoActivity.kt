@@ -15,8 +15,10 @@ import com.grupo1.medicapp.modelo.UsuarioDAO
 
 class BienvenidoActivity : AppCompatActivity() {
 
+    private lateinit var txtBuscarProducto:TextView
     private lateinit var btn_Actualizar_Datos: Button
     private lateinit var btnBuscarProducto:Button
+    private lateinit var btnProductos:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,21 @@ class BienvenidoActivity : AppCompatActivity() {
     }
 
     fun asignarReferencias(){
+        txtBuscarProducto = findViewById(R.id.txtBuscarProducto)
+        btnBuscarProducto = findViewById(R.id.btnBuscarProducto)
+        btnProductos = findViewById(R.id.btnProductos)
+
+        btnBuscarProducto.setOnClickListener{
+            val intent = Intent(this,ProductosActivity::class.java)
+            intent.putExtra("var_buscar_producto", txtBuscarProducto.text)
+            startActivity(intent)
+        }
+
+        btnProductos.setOnClickListener{
+            val intent = Intent(this,RegistroProductoActivity::class.java)
+            startActivity(intent)
+        }
+
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
         val textViewNombreUsuario = findViewById<TextView>(R.id.textViewNombreUsuario)
         textViewNombreUsuario.text = "Bienvenido, $nombreUsuario"
@@ -53,12 +70,6 @@ class BienvenidoActivity : AppCompatActivity() {
             intent.putExtra("var_nombres",datosUsuario.nombres)
             intent.putExtra("var_apellido",datosUsuario.apellidos)
             intent.putExtra("var_dni",datosUsuario.dni)
-            startActivity(intent)
-        }
-        
-        btnBuscarProducto = findViewById(R.id.btnBuscarProducto)
-        btnBuscarProducto.setOnClickListener{
-            val intent = Intent(this,ProductosActivity::class.java)
             startActivity(intent)
         }
     }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Medicapp"
         tools:targetApi="31">
         <activity
+            android:name=".RegistroProductoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistroFarmacia"
             android:exported="false" />
         <activity
